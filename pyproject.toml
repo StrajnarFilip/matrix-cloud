@@ -25,7 +25,8 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "simple-matrix-api@git+https://github.com/StrajnarFilip/simple-matrix-api"
+  "requests",
+  "simple-matrix-api"
 ]
 
 [project.urls]
