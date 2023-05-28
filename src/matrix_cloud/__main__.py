@@ -67,9 +67,9 @@ matrix_address = args.matrix if args.matrix != None else "matrix.org"
 if args.download:
     print("Downloading")
     download_large_file(args.username, args.password, args.file_path,
-                        matrix_address)
+                        matrix_address, args.outfile)
 
 else:
     print("Uploading")
     upload_large_file(args.username, args.password, args.file_path,
-                      matrix_address)
+                      matrix_address, args.outfile)
