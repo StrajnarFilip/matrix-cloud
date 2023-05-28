@@ -1,3 +1,4 @@
+from typing import Union
 import simple_matrix_api
 from simple_matrix_api.client import Client
 import argparse
@@ -7,12 +8,8 @@ from os import path
 READ_SIZE = 50_000_000
 
 
-def upload_large_file(
-    username: str,
-    password: str,
-    file_path: str,
-    matrix_url: str,
-):
+def upload_large_file(username: str, password: str, file_path: str,
+                      matrix_url: str, out_file: Union[str, None]):
     if not path.isfile(file_path):
         print("Argument file_path doesn't represent a file.")
         return
@@ -29,16 +26,12 @@ def upload_large_file(
 
     file_name = path.basename(file_path)
     json_path = f"{file_name}.json"
-    with open(json_path, "w") as output:
+    with open(json_path if out_file == None else out_file, "w") as output:
         json.dump({"file_name": file_name, "urls": urls}, output)
 
 
-def download_large_file(
-    username: str,
-    password: str,
-    file_path: str,
-    matrix_url: str,
-):
+def download_large_file(username: str, password: str, file_path: str,
+                        matrix_url: str, out_file: Union[str, None]):
     if not path.isfile(file_path):
         print("Argument 'file_path' doesn't represent a file.")
         return
@@ -52,7 +45,8 @@ def download_large_file(
 
     with open(file_path, "r") as input:
         json_data = json.load(input)
-        with open(json_data["file_name"], "wb") as output:
+        with open(json_data["file_name"] if out_file == None else out_file,
+                  "wb") as output:
             for url in json_data["urls"]:
                 content_part = client.get_file(url)
                 if content_part != None:
@@ -64,6 +58,7 @@ parser.add_argument("username")
 parser.add_argument("password")
 parser.add_argument("file_path")
 parser.add_argument("-m", "--matrix")
+parser.add_argument("-o", "--outfile")
 parser.add_argument("-d", "--download", action='store_true')
 args = parser.parse_args()
 
