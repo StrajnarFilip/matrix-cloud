@@ -26,7 +26,8 @@ classifiers = [
 ]
 dependencies = [
   "requests",
-  "simple-matrix-api"
+  "simple-matrix-api",
+  "PySimpleGUI"
 ]
 
 [project.urls]

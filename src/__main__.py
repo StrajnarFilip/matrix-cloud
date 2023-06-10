@@ -1,5 +1,6 @@
 import argparse
 from matrix_cloud import download_large_file, upload_large_file
+from matrix_cloud.gui import run_gui
 
 
 def main():
@@ -10,7 +11,13 @@ def main():
     parser.add_argument("-m", "--matrix")
     parser.add_argument("-o", "--outfile")
     parser.add_argument("-d", "--download", action='store_true')
+    parser.add_argument("-g", "--gui", action='store_true')
+
     args = parser.parse_args()
+
+    if args.gui:
+        run_gui()
+        return
 
     matrix_address = args.matrix if args.matrix != None else "matrix.org"
 
