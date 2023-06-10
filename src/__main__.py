@@ -5,9 +5,9 @@ from matrix_cloud.gui import run_gui
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("username")
-    parser.add_argument("password")
-    parser.add_argument("file_path")
+    parser.add_argument("-u", "--username")
+    parser.add_argument("-p", "--password")
+    parser.add_argument("-i", "--infile")
     parser.add_argument("-m", "--matrix")
     parser.add_argument("-o", "--outfile")
     parser.add_argument("-d", "--download", action='store_true')
@@ -23,12 +23,12 @@ def main():
 
     if args.download:
         print("Downloading")
-        download_large_file(args.username, args.password, args.file_path,
+        download_large_file(args.username, args.password, args.infile,
                             matrix_address, args.outfile)
 
     else:
         print("Uploading")
-        upload_large_file(args.username, args.password, args.file_path,
+        upload_large_file(args.username, args.password, args.infile,
                           matrix_address, args.outfile)
 
 

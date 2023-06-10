@@ -4,3 +4,4 @@ test.json
 *.msi
 /dist
 /testing
+config.json
